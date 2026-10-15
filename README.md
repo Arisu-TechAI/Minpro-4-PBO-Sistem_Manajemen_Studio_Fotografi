@@ -184,3 +184,62 @@ Penerapan Abstract Method ini terdapat pada class **LayananFotografi**. Pada met
 
 Secara fungsi bisnis dalam sistem, Interface **PotonganHarga** berfungsi untuk mengakomodasi fitur keanggotaan khusus (VIP). Interface ini bertindak sebagai mekanisme otomatis yang memberikan potongan harga (diskon sebesar 15%) kepada pelanggan VIP saat melakukan pemesanan paket fotografi.  
 Dengan adanya interface ini, sistem dapat secara fleksibel membedakan perhitungan total tagihan antara klien reguler dan klien VIP tanpa perlu merusak logika pembayaran dasar yang sudah ada.
+
+## O. Prepared statement JDBC  
+
+  - **Membuat Database di PhpMyAdmin**
+
+    <img width="233" height="146" alt="buat database di phpmyadmin" src="https://github.com/user-attachments/assets/f406af44-4024-4312-a695-690c6a1d7d4e" />
+
+    Untuk menerapkan JDBC di dalam program, hal pertama yang perlu dilakukan adalah membuat database terlebih dahulu yang berisi segala macam data yang diperlukan dalam program ini, misal data transaksi, akun, dll.
+    Untuk penerapan program ini, pertama-tama dibuatlah database bernama **studio_fotografi** menggunakan sql phpmyadmin yang berisi beberapa tabel yaitu **akun, transaksi**, dan **layanan** yang masing-masing akan digunakan untuk menyimpan data sesuai kebutuhan program.  
+
+  - **Membuat Dummy Akun dalam database**
+
+    <img width="576" height="448" alt="buat akun dummy di SQL" src="https://github.com/user-attachments/assets/e8b4c6e0-5268-445d-8a34-f30ce4a6c455" />
+
+    Selanjutnya adalah memasukkan data akun pengguna ke dalam database (akun dummy bawaan) agar program sudah memiliki data akun pengguna terlebih dahulu.
+    Pada gambar di atas, dibuat 2 akun dummy yaitu akun **atmin** dengan role **Admin** yang bertugas mengelola administrasi dan transaksi pihak studio fotografi, dan akun **Arisu** dengan role **User** yang merupakan akun pihak client yang dapat melakukan pemesanan jasa melalui program ini.  
+
+  - **Membuat Daftar Paket jasa fotografi kedalam Database**
+
+    <img width="682" height="229" alt="insert paket dummy fotografi" src="https://github.com/user-attachments/assets/b3e331b3-6a1d-4fb2-bada-a2f0e779d9d8" />
+
+    Selanjutnya adalah membuat beberapa daftar jasa fotografi ke dalam database. Pada bagian ini, dibuat 2 daftar jasa yang disediakan oleh pihak studio, yaitu **paket Reguler** dan **paket Event** sebagai sarana pemesanan jasa fotografi yang dapat dilakukan client
+    
+  - **Membuat daftar Transaksi Dummy awal**
+
+    <img width="700" height="359" alt="buat dummy transaksi" src="https://github.com/user-attachments/assets/e82fb78d-e4d0-4824-bba1-9d3724e74ffa" />
+
+    Selanjutnya memasukkan data dummy transaksi ke dalam database. Pada gambar di atas, data dummy transaksi ditujukan ke akun dengan id "**User-001**(Arisu) yang melakukan pemesanan paket dengan id **REG-01 (paket reguler)**
+
+  - **Memasukkan Dependencies Mysql untuk koneksi ke Database**
+
+    <img width="905" height="426" alt="memasukkan dependencies utk koneksi ke database" src="https://github.com/user-attachments/assets/a86e7dc4-7dea-40b4-89c8-091d65265340" />
+
+    Pada bagian ini, agar program dapat dikoneksikan dengan database (secara lokal), perlu dilakukan beberapa konfigurasi di dalam program ini.
+    Pada file **pom.xml**, driver JDBC perlu diinstall terlebih dahulu menggunakan dependency sesuai gambar di atas. Tujuannya agar program dapat mengenali mysql sebagai tujuan dari koneksi ke database yang digunakan.
+
+  - **Buat Package Koneksi ke Database**
+
+    <img width="285" height="84" alt="buat package database utk koneksi" src="https://github.com/user-attachments/assets/5fe925c6-fae4-4c97-9985-5c7a25a07436" />
+
+    Selanjutnya masuk ke tahap koneksi program ke database. Pada gambar di atas, hal yang dilakukan adalah membuat **Package database** berisi **class Koneksi.java & StudioDAO.java**. Tujuannya adalah untuk memastikan penanganan sinkronisai antara database dengan program dikhususkan agar berjalan secara independen di package database.
+
+    <img width="915" height="417" alt="class koneksi utk konek ke database" src="https://github.com/user-attachments/assets/dacfd6a1-8539-43e8-beb3-58c547fdf2e8" />
+
+    Selanjutnya adalah inisialisasi koneksi database ke dalam program. Pada class **koneksi.java**, program diatur untuk melakukan koneksi ke database bernama **studio_fotografi**. Database inilah yang digunakan sebagai pusat penyimpanan data permanen pada program, sehingga segala proses pencatatan transaksi, akun, dan lain-lain akan tetap tersimpan meskipun program ditutup.
+
+  - **Implementasi DAO**
+
+    <img width="512" height="208" alt="DAO" src="https://github.com/user-attachments/assets/47bf0b72-135e-42f2-bc9c-33b441ba9009" />
+
+    Dalam penerapan JDBC ini, class **StudioDAO.java** berfungsi sebagai kelas yang bertanggung jawab untuk mengambil alih semua fungsi CRUDD dan interaksi dengan database, seperti membuat akun baru, mengambil data transaksi yang terjadi, dan mengupdate data transaksi. Dengan adanya penghubung ini, maka segala perubahan yang dilakukan pengguna ketika program berjalan dapat tersinkronisai dengan baik terhadap database.
+
+  - **Hasil Implementasi JDBC**
+    Dengan memindahkan seluruh urusan penyimpanan ke dalam DAO, class **Transaksi_Controller** kini menjadi lebih bersih. Semua penerapan **Array List** dan data dummy sebelumnya telah bisa dihapus. Class Controller ini kembali pada fungsi idealnya dalam arsitektur MVC, yaitu murni memproses alur bisnis (seperti menghitung statistik atau memvalidasi logika) dan mendelegasikan urusan tarik-simpan data secara langsung kepada kelas **StudioDAO**.
+
+
+
+
+
