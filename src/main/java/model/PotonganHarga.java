@@ -10,6 +10,6 @@ package model;
  */
 
 public interface PotonganHarga {
-    // Method interface untuk diimplementasikan oleh class tertentu (misal VIP)
+    // Method interface untuk diimplementasikan oleh class tertentu (contoh VIP)
     double hitungDiskon(double hargaAwal);
 }

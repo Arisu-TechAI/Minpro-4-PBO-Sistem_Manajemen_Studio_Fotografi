@@ -4,6 +4,7 @@
  */
 package model;
 
+
 /**
  *
  * @author USER
@@ -14,8 +15,8 @@ public abstract class Akun {
     protected String id;
     protected String nama;
 
-    public Akun(String id, String nama) {
-        this.id = id;
+    public Akun(String id_akun, String nama) {
+        this.id = id_akun;
         this.nama = nama;
     }
 

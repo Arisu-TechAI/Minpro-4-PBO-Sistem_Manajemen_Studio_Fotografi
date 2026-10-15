@@ -15,23 +15,32 @@ public class Transaksi {
     private String idTransaksi;
     private Client client; 
     private LayananFotografi paket; 
-    private String tanggalSesi;
+    private String TanggalSesi;
     private String status; 
 
-    public Transaksi(String idTransaksi, Client client, LayananFotografi paket, String tanggalSesi) {
+    public Transaksi(String idTransaksi, Client client, LayananFotografi paket, String TanggalSesi) {
         this.idTransaksi = idTransaksi;
         this.client = client;
         this.paket = paket;
-        this.tanggalSesi = tanggalSesi;
-        this.status = "Menunggu Validasi Admin";
+        this.TanggalSesi = TanggalSesi;
+        this.status = "Menunggu Validasi Atmin";
     }
 
-    public String getIdTransaksi() { return idTransaksi; }
-    public Client getClient() { return client; }
-    public LayananFotografi getPaket() { return paket; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    // return method
+    public String getIdTransaksi() { 
+        return idTransaksi; }
+    public Client getClient() { 
+        return client; }
+    public LayananFotografi getPaket() { 
+        return paket; }
+    public String getStatus() { 
+        return status; }
+    public void setStatus(String status) { 
+        this.status = status; }
+    public String getTanggalSesi() { 
+        return TanggalSesi; }
 
+    
     // Method Overloading
     public void cetakStruk() {
         cetakStruk(true);
@@ -42,7 +51,7 @@ public class Transaksi {
         System.out.println("ID Transaksi : " + idTransaksi);
         System.out.println("Nama Klien   : " + client.getNama() + " (" + client.getNoTelp() + ")");
         client.tampilkanPeran(); // Polymorphism (Overriding)
-        System.out.println("Tanggal Sesi : " + tanggalSesi);
+        System.out.println("Tanggal Sesi : " + TanggalSesi);
         System.out.println("Paket        : " + paket.getInfoDasar());
         
         // Penerapan Polymorphism (Overriding)
@@ -63,4 +72,5 @@ public class Transaksi {
         System.out.println("Status       : " + status);
         System.out.println("------------------------------------");
     }
+
 }

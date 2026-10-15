@@ -63,7 +63,7 @@ public class Menu {
                 System.out.println("Login Berhasil! Selamat datang, Endministrator.");
                 panelAdmin();
             } else if (akunDitemukan instanceof Client) {
-                System.out.println("Login Berhasil! Selamat datang kembali, " + akunDitemukan.getNama() + ".");
+                System.out.println("Login Berhasil! Selamat datang kembali, " + akunDitemukan.getNama() + " .");
                 panelKlien((Client) akunDitemukan);
             }
         } else {
@@ -133,7 +133,7 @@ public class Menu {
     private void panelKlien(Client userAktif) {
         String menu;
         do {
-            System.out.println("\n--- MENU USER" + userAktif.getNama().toUpperCase() + " ---");
+            System.out.println("\n--- MENU USER " + userAktif.getNama().toUpperCase() + " ---");
             userAktif.tampilkanPeran();
             System.out.println("1. Buat Pesanan Jasa Fotografi Baru");
             System.out.println("2. Cek Status Pesanan Saya");
